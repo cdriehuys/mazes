@@ -1,0 +1,15 @@
+{
+	"name": "Go",
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/joshuanianji/devcontainer-features/github-cli-persistence:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"patbenatar.advanced-new-file"
+			]
+		}
+	}
+}
