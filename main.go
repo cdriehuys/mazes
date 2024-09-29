@@ -152,7 +152,10 @@ func (g *grid) EachCell(visit func(c *cell)) {
 }
 
 func main() {
+	rand := NewRand()
+
 	g := NewGrid(4, 4)
-	BinaryTree{}.On(g)
+	MakeBinaryTree(rand).On(g)
+
 	asciiRenderer{os.Stdout}.Render(g)
 }

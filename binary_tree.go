@@ -1,8 +1,16 @@
 package main
 
-import "math/rand"
+type random interface {
+	Cell([]*cell) *cell
+}
 
-type BinaryTree struct{}
+type BinaryTree struct {
+	rand random
+}
+
+func MakeBinaryTree(rand random) BinaryTree {
+	return BinaryTree{rand}
+}
 
 func (b BinaryTree) On(grid *grid) {
 	grid.EachCell(func(c *cell) {
@@ -15,13 +23,8 @@ func (b BinaryTree) On(grid *grid) {
 			neighbors = append(neighbors, c.East())
 		}
 
-		if len(neighbors) == 0 {
-			return
+		if neighbor := b.rand.Cell(neighbors); neighbor != nil {
+			c.Link(neighbor)
 		}
-
-		index := rand.Intn(len(neighbors))
-		neighbor := neighbors[index]
-
-		c.Link(neighbor)
 	})
 }
