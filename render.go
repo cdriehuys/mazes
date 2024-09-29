@@ -1,17 +1,21 @@
-package main
+package mazes
 
 import (
 	"fmt"
 	"io"
 )
 
-// asciiRenderer outputs the grid as ASCII symbols to the provided output
+// ASCIIRenderer outputs the grid as ASCII symbols to the provided output
 // writer.
-type asciiRenderer struct {
+type ASCIIRenderer struct {
 	output io.Writer
 }
 
-func (r asciiRenderer) Render(grid *grid) {
+func MakeASCIIRenderer(output io.Writer) ASCIIRenderer {
+	return ASCIIRenderer{output}
+}
+
+func (r ASCIIRenderer) Render(grid *Grid) {
 	// Top boundary
 	r.fprint("+")
 	for i := 0; i < grid.columns; i++ {
@@ -46,10 +50,10 @@ func (r asciiRenderer) Render(grid *grid) {
 	}
 }
 
-func (r asciiRenderer) fprint(a ...any) {
+func (r ASCIIRenderer) fprint(a ...any) {
 	fmt.Fprint(r.output, a...)
 }
 
-func (r asciiRenderer) fprintln(a ...any) {
+func (r ASCIIRenderer) fprintln(a ...any) {
 	fmt.Fprintln(r.output, a...)
 }

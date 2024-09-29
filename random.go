@@ -1,4 +1,4 @@
-package main
+package mazes
 
 import (
 	"math/rand"

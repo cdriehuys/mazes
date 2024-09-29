@@ -1,4 +1,4 @@
-package main
+package mazes
 
 type random interface {
 	Bool() bool
@@ -13,7 +13,7 @@ func MakeBinaryTree(rand random) BinaryTree {
 	return BinaryTree{rand}
 }
 
-func (b BinaryTree) On(grid *grid) {
+func (b BinaryTree) On(grid *Grid) {
 	grid.EachCell(func(c *cell) {
 		var neighbors []*cell
 		if c.North() != nil {

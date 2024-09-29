@@ -1,8 +1,4 @@
-package main
-
-import (
-	"os"
-)
+package mazes
 
 type cell struct {
 	row    int
@@ -90,14 +86,14 @@ func (c *cell) Neighbors() []*cell {
 	return neighbors
 }
 
-type grid struct {
+type Grid struct {
 	rows    int
 	columns int
 
 	cells [][]*cell
 }
 
-func NewGrid(rows, columns int) *grid {
+func NewGrid(rows, columns int) *Grid {
 	gridRows := make([][]*cell, rows)
 	for row := 0; row < rows; row++ {
 		gridCols := make([]*cell, columns)
@@ -131,7 +127,7 @@ func NewGrid(rows, columns int) *grid {
 		}
 	}
 
-	return &grid{
+	return &Grid{
 		rows:    rows,
 		columns: columns,
 
@@ -139,11 +135,11 @@ func NewGrid(rows, columns int) *grid {
 	}
 }
 
-func (g *grid) Cell(row, col int) *cell {
+func (g *Grid) Cell(row, col int) *cell {
 	return g.cells[row][col]
 }
 
-func (g *grid) EachCell(visit func(c *cell)) {
+func (g *Grid) EachCell(visit func(c *cell)) {
 	for row := 0; row < g.rows; row++ {
 		for col := 0; col < g.columns; col++ {
 			visit(g.cells[row][col])
@@ -151,17 +147,8 @@ func (g *grid) EachCell(visit func(c *cell)) {
 	}
 }
 
-func (g *grid) EachRow(visit func(row []*cell)) {
+func (g *Grid) EachRow(visit func(row []*cell)) {
 	for row := range g.rows {
 		visit(g.cells[row])
 	}
-}
-
-func main() {
-	rand := NewRand()
-
-	g := NewGrid(10, 10)
-	MakeSidewinder(rand).On(g)
-
-	asciiRenderer{os.Stdout}.Render(g)
 }

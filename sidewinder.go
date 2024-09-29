@@ -1,4 +1,4 @@
-package main
+package mazes
 
 type Sidewinder struct {
 	rand random
@@ -8,7 +8,7 @@ func MakeSidewinder(rand random) Sidewinder {
 	return Sidewinder{rand}
 }
 
-func (s Sidewinder) On(grid *grid) {
+func (s Sidewinder) On(grid *Grid) {
 	grid.EachRow(func(row []*cell) {
 		var run []*cell
 
