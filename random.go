@@ -15,6 +15,10 @@ func NewRand() *Rand {
 	}
 }
 
+func (r Rand) Bool() bool {
+	return r.r.Intn(2) == 0
+}
+
 func (r Rand) Cell(cells []*cell) *cell {
 	if len(cells) == 0 {
 		return nil

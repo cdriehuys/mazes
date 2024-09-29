@@ -151,11 +151,17 @@ func (g *grid) EachCell(visit func(c *cell)) {
 	}
 }
 
+func (g *grid) EachRow(visit func(row []*cell)) {
+	for row := range g.rows {
+		visit(g.cells[row])
+	}
+}
+
 func main() {
 	rand := NewRand()
 
-	g := NewGrid(4, 4)
-	MakeBinaryTree(rand).On(g)
+	g := NewGrid(10, 10)
+	MakeSidewinder(rand).On(g)
 
 	asciiRenderer{os.Stdout}.Render(g)
 }

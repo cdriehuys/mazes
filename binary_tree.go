@@ -1,6 +1,7 @@
 package main
 
 type random interface {
+	Bool() bool
 	Cell([]*cell) *cell
 }
 
